@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 2rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .option {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #f0f2f5;
+        }
+
+        .option.selected {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .btn {
+            background: #1a73e8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+
+        .timer {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #1a73e8;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer" id="timer">Time: 30:00</div>
+    
+    <div class="quiz-container">
+        <h1 id="quizTitle">Quiz Title</h1>
+        <div id="questionContainer">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentAnswers = {};
+        let timeLeft = 1800; // 30 minutes
+
+        function loadQuiz() {
+            // Sample questions (replace with API call)
+            questions = [
+                {
+                    id: 1,
+                    question: "Sample question 1?",
+                    options: ["Option 1", "Option 2", "Option 3", "Option 4"],
+                    correct: 0
+                },
+                // Add more questions
+            ];
+            renderQuestions();
+            startTimer();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionContainer');
+            container.innerHTML = questions.map((q, index) => `
+                <div class="question">
+                    <h3>Question ${index + 1}</h3>
+                    <p>${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <div class="option" onclick="selectOption(${index}, ${i})">${opt}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            currentAnswers[questionIndex] = optionIndex;
+            // Update UI to show selected option
+        }
+
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+            const timer = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            // Calculate results and redirect to results page
+            window.location.href = 'results.html';
+        }
+
+        // Initialize quiz
+        loadQuiz();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .navbar {
+            background: #1a73e8;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .quiz-card h3 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: #1a73e8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .stats-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Learning Analytics</h2>
+        <div>
+            <span id="studentName">Welcome, Student</span>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="stats-section">
+            <h2>Your Progress</h2>
+            <p>Quizzes Completed: <span id="completedQuizzes">0</span></p>
+            <p>Average Score: <span id="averageScore">0%</span></p>
+        </div>
+
+        <h2>Available Quizzes</h2>
+        <div class="quiz-grid">
+            <div class="quiz-card">
+                <h3>Mathematics Quiz</h3>
+                <p>Test your mathematical skills with this comprehensive quiz.</p>
+                <a href="quiz.html?subject=math" class="btn">Start Quiz</a>
+            </div>
+            <div class="quiz-card">
+                <h3>Science Quiz</h3>
+                <p>Explore your understanding of scientific concepts.</p>
+                <a href="quiz.html?subject=science" class="btn">Start Quiz</a>
+            </div>
+            <div class="quiz-card">
+                <h3>English Quiz</h3>
+                <p>Assess your language and comprehension skills.</p>
+                <a href="quiz.html?subject=english" class="btn">Start Quiz</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            // Add logout logic here
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html> 

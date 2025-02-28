@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .navbar {
+            background: #1a73e8;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .student-list {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn {
+            background: #1a73e8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Admin Dashboard</h2>
+        <button class="btn" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Students</h3>
+                <p class="stat">150</p>
+            </div>
+            <div class="stat-card">
+                <h3>Average Score</h3>
+                <p class="stat">78%</p>
+            </div>
+            <div class="stat-card">
+                <h3>Quizzes Completed</h3>
+                <p class="stat">450</p>
+            </div>
+        </div>
+
+        <div class="student-list">
+            <h2>Student Performance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Quizzes Completed</th>
+                        <th>Average Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <!-- Student data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="quiz-management">
+            <h2>Quiz Management</h2>
+            <button class="btn" onclick="createNewQuiz()">Create New Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        function loadStudentData() {
+            // Add logic to load student data
+            const studentData = [
+                { id: "001", name: "John Doe", quizzes: 5, average: "85%" },
+                { id: "002", name: "Jane Smith", quizzes: 4, average: "92%" },
+                // Add more student data
+            ];
+
+            const tableBody = document.getElementById('studentTableBody');
+            tableBody.innerHTML = studentData.map(student => `
+                <tr>
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.quizzes}</td>
+                    <td>${student.average}</td>
+                    <td>
+                        <button class="btn" onclick="viewStudent('${student.id}')">View Details</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function createNewQuiz() {
+            // Add quiz creation logic
+        }
+
+        function viewStudent(studentId) {
+            // Add student detail view logic
+        }
+
+        function logout() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize dashboard
+        loadStudentData();
+    </script>
+</body>
+</html> 

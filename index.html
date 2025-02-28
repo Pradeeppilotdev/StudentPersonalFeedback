@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Learning Analytics - Login/Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 Q30,5 50,10 T90,10" fill="none" stroke="%231a73e8" stroke-width="0.5" opacity="0.2"/></svg>');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 65%, rgba(26,115,232,0.1) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-form, .register-form {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        input {
+            padding: 0.8rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+        }
+
+        button {
+            background: #1a73e8;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .form-switch {
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: #1a73e8;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Learning Analytics</h1>
+        
+        <div class="form-container">
+            <div class="toggle-buttons">
+                <button class="toggle-btn active" onclick="switchUserType('student')">Student</button>
+                <button class="toggle-btn" onclick="switchUserType('teacher')">Teacher</button>
+            </div>
+
+            <!-- Student Login Form -->
+            <div id="studentLogin" class="login-form active">
+                <h2>Student Login</h2>
+                <div class="input-group">
+                    <label for="studentEmail">Email</label>
+                    <input type="email" id="studentEmail" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="studentPassword">Password</label>
+                    <input type="password" id="studentPassword" placeholder="Enter your password">
+                </div>
+                <button onclick="loginStudent()">Login</button>
+                <div class="form-switch">
+                    New student? <button class="switch-btn" onclick="toggleForm('student', true)">Register here</button>
+                </div>
+            </div>
+
+            <!-- Student Register Form -->
+            <div id="studentRegister" class="register-form">
+                <h2>Student Registration</h2>
+                <div class="input-group">
+                    <label for="regStudentName">Full Name</label>
+                    <input type="text" id="regStudentName" placeholder="Enter your full name">
+                </div>
+                <div class="input-group">
+                    <label for="regStudentEmail">Email</label>
+                    <input type="email" id="regStudentEmail" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="regStudentRollNo">Roll Number</label>
+                    <input type="text" id="regStudentRollNo" placeholder="Enter your roll number">
+                </div>
+                <div class="input-group">
+                    <label for="regStudentClass">Class</label>
+                    <input type="text" id="regStudentClass" placeholder="Enter your class">
+                </div>
+                <div class="input-group">
+                    <label for="regStudentPassword">Password</label>
+                    <input type="password" id="regStudentPassword" placeholder="Create password">
+                </div>
+                <div class="input-group">
+                    <label for="regStudentConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regStudentConfirmPassword" placeholder="Confirm password">
+                </div>
+                <button onclick="registerStudent()">Register</button>
+                <div class="form-switch">
+                    Already registered? <button class="switch-btn" onclick="toggleForm('student', false)">Login here</button>
+                </div>
+            </div>
+
+            <!-- Teacher Login Form -->
+            <div id="teacherLogin" class="login-form">
+                <h2>Teacher Login</h2>
+                <div class="input-group">
+                    <label for="teacherEmail">Email</label>
+                    <input type="email" id="teacherEmail" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="teacherPassword">Password</label>
+                    <input type="password" id="teacherPassword" placeholder="Enter your password">
+                </div>
+                <button onclick="loginTeacher()">Login</button>
+                <div class="form-switch">
+                    New teacher? <button class="switch-btn" onclick="toggleForm('teacher', true)">Register here</button>
+                </div>
+            </div>
+
+            <!-- Teacher Register Form -->
+            <div id="teacherRegister" class="register-form">
+                <h2>Teacher Registration</h2>
+                <div class="input-group">
+                    <label for="regTeacherName">Full Name</label>
+                    <input type="text" id="regTeacherName" placeholder="Enter your full name">
+                </div>
+                <div class="input-group">
+                    <label for="regTeacherEmail">Email</label>
+                    <input type="email" id="regTeacherEmail" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="regTeacherCourse">Course</label>
+                    <input type="text" id="regTeacherCourse" placeholder="Enter your course">
+                </div>
+                <div class="input-group">
+                    <label for="regTeacherStaffId">Staff ID</label>
+                    <input type="text" id="regTeacherStaffId" placeholder="Enter your staff ID">
+                </div>
+                <div class="input-group">
+                    <label for="regTeacherPassword">Password</label>
+                    <input type="password" id="regTeacherPassword" placeholder="Create password">
+                </div>
+                <div class="input-group">
+                    <label for="regTeacherConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regTeacherConfirmPassword" placeholder="Confirm password">
+                </div>
+                <button onclick="registerTeacher()">Register</button>
+                <div class="form-switch">
+                    Already registered? <button class="switch-btn" onclick="toggleForm('teacher', false)">Login here</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchUserType(type) {
+            const buttons = document.querySelectorAll('.toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.login-form, .register-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            if (type === 'student') {
+                document.getElementById('studentLogin').classList.add('active');
+            } else {
+                document.getElementById('teacherLogin').classList.add('active');
+            }
+        }
+
+        function toggleForm(userType, isRegister) {
+            document.querySelectorAll('.login-form, .register-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            const formId = `${userType}${isRegister ? 'Register' : 'Login'}`;
+            document.getElementById(formId).classList.add('active');
+        }
+
+        function loginStudent() {
+            const email = document.getElementById('studentEmail').value;
+            const password = document.getElementById('studentPassword').value;
+            // Add login validation logic here
+            window.location.href = 'dashboard.html';
+        }
+
+        function loginTeacher() {
+            const email = document.getElementById('teacherEmail').value;
+            const password = document.getElementById('teacherPassword').value;
+            // Add login validation logic here
+            window.location.href = 'admin-dashboard.html';
+        }
+
+        function registerStudent() {
+            // Add student registration logic here
+            alert('Student registration successful!');
+            toggleForm('student', false);
+        }
+
+        function registerTeacher() {
+            // Add teacher registration logic here
+            alert('Teacher registration successful!');
+            toggleForm('teacher', false);
+        }
+    </script>
+</body>
+</html>

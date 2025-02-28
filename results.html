@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+        }
+
+        .results-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .score {
+            font-size: 3rem;
+            color: #1a73e8;
+            margin: 1rem 0;
+        }
+
+        .feedback-section {
+            margin-top: 2rem;
+        }
+
+        .feedback-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #1a73e8;
+            background: #f8f9fa;
+        }
+
+        .btn {
+            background: #1a73e8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <h1>Quiz Results</h1>
+        
+        <div class="score-card">
+            <h2>Your Score</h2>
+            <div class="score">85%</div>
+            <p>Great job! You've performed above average.</p>
+        </div>
+
+        <div class="feedback-section">
+            <h2>Detailed Feedback</h2>
+            <div class="feedback-item">
+                <h3>Mathematics</h3>
+                <p>Strong performance in algebra, but needs improvement in geometry.</p>
+            </div>
+            <div class="feedback-item">
+                <h3>Problem Solving</h3>
+                <p>Excellent analytical skills demonstrated throughout the quiz.</p>
+            </div>
+            <div class="feedback-item">
+                <h3>Areas for Improvement</h3>
+                <p>Focus on practicing more geometry problems and time management.</p>
+            </div>
+        </div>
+
+        <a href="dashboard.html" class="btn">Return to Dashboard</a>
+    </div>
+
+    <script>
+        function loadResults() {
+            // Add logic to load and display results
+        }
+
+        // Initialize results
+        loadResults();
+    </script>
+</body>
+</html> 

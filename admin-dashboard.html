@@ -72,6 +72,23 @@
             cursor: pointer;
         }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7RgibPhbBHGBolkNhpXlwemswBtDBFTs",
+            authDomain: "myflutterproject-90dcb.firebaseapp.com",
+            projectId: "myflutterproject-90dcb",
+            storageBucket: "myflutterproject-90dcb.firebasestorage.app",
+            messagingSenderId: "969548585920",
+            appId: "1:969548585920:web:62e3c06088b74a2c2a4625",
+            measurementId: "G-9S0N471H67"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 <body>
     <nav class="navbar">
@@ -120,6 +137,34 @@
     </div>
 
     <script>
+        // Firebase Authentication
+        const auth = firebase.auth();
+
+        function signIn(email, password) {
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    console.log('Signed in:', user);
+                    loadStudentData();
+                })
+                .catch((error) => {
+                    console.error('Error signing in:', error);
+                });
+        }
+
+        function signOut() {
+            auth.signOut().then(() => {
+                console.log('Signed out');
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                console.error('Error signing out:', error);
+            });
+        }
+
+        // Example usage
+        signIn('admin@example.com', 'adminpassword');
+
         function loadStudentData() {
             // Add logic to load student data
             const studentData = [
@@ -151,11 +196,11 @@
         }
 
         function logout() {
-            window.location.href = 'index.html';
+            signOut();
         }
 
         // Initialize dashboard
-        loadStudentData();
+        // loadStudentData(); // Moved inside signIn function
     </script>
 </body>
-</html> 
+</html>
